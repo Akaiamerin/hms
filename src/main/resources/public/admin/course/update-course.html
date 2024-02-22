@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- title -->
+    <title>作业管理系统 | 修改课程</title>
+    <!-- favicon -->
+    <link rel="icon" th:href="@{/static/images/favicon.png}" type="image/png">
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/lib/metismenu/metisMenu.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+</head>
+
+<body>
+    <!-- preloader start -->
+    <div th:replace="~{/admin/index::preloader}"></div>
+    <!-- preloader end -->
+    <!-- main wrapper start -->
+    <div class="main-wrapper">
+        <!-- sidebar start -->
+        <aside th:replace="~{/admin/index::sidebar}"></aside>
+        <!-- sidebar end -->
+        <!-- header start -->
+        <header th:replace="~{/admin/index::header}"></header>
+        <!-- header end -->
+        <!-- main content start -->
+        <div class="main-content">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col">
+                        <h2>修改课程</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>课程编号</th>
+                                    <th>课程名称</th>
+                                    <th>课程类型</th>
+                                    <th>教师姓名</th>
+                                    <th>课程详情</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td th:text="${courseVO.getId()}"></td>
+                                    <td th:text="${courseVO.getNo()}"></td>
+                                    <td th:text="${courseVO.getTitle()}"></td>
+                                    <td th:text="${courseVO.getCourseTypeTitle()}"></td>
+                                    <td th:text="${courseVO.getTeacherName()}"></td>
+                                    <td th:text="${courseVO.getDetail()}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form th:action="@{/admin/update-course}" method="post">
+                            <div class="form-group">
+                                <label class="form-label" for="id"></label>
+                                <input class="form-control" type="text" id="id" name="id"
+                                       th:value="${courseVO.getId()}" hidden>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="no">课程编号</label>
+                                <input class="form-control" type="text" id="no" name="no"
+                                       th:value="${courseVO.getNo()}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="title">课程名称</label>
+                                <input class="form-control" type="text" id="title" name="title"
+                                       th:value="${courseVO.getTitle()}">
+                                <span class="small text-danger" th:text="${titleMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="courseTypeTitle">课程类型</label>
+                                <select class="form-select" id="courseTypeTitle" name="courseTypeTitle">
+                                    <option th:each="courseType : ${courseTypeList}"
+                                            th:value="${courseType.getTitle()}"
+                                            th:text="${courseType.getTitle()}"
+                                            th:selected="${courseType.getTitle() == courseVO.getCourseTypeTitle()}"></option>
+                                </select>
+                                <span class="small text-danger" th:text="${courseTypeTitleMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="teacherNo">教师编号</label>
+                                <select class="form-select" id="teacherNo" name="teacherNo">
+                                    <option th:each="teacher : ${teacherList}"
+                                            th:value="${teacher.getNo()}"
+                                            th:text="${teacher.getNo() + ' ' + teacher.getName()}"
+                                            th:selected="${teacher.getName() == courseVO.getTeacherName()}"></option>
+                                </select>
+                                <span class="small text-danger" th:text="${teacherNoMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="detail">课程详情</label>
+                                <input class="form-control" type="text" id="detail" name="detail"
+                                       th:value="${courseVO.getDetail()}">
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content end -->
+        <!-- footer start -->
+        <footer th:replace="~{/admin/index::footer}"></footer>
+        <!-- footer end -->
+    </div>
+    <!-- main wrapper end -->
+    <!-- js -->
+    <script th:src="@{/static/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/lib/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/static/lib/metismenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/js/main.js}"></script>
+</body>
+
+</html>

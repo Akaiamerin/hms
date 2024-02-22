@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- title -->
+    <title>作业管理系统 | 管理员主页</title>
+    <!-- favicon -->
+    <link rel="icon" th:href="@{/static/images/favicon.png}" type="image/png">
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/lib/metismenu/metisMenu.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+</head>
+
+<body>
+    <!-- preloader start -->
+    <div class="preloader" th:fragment="preloader"></div>
+    <!-- preloader end -->
+    <!-- main wrapper start -->
+    <div class="main-wrapper">
+        <!-- sidebar start -->
+        <aside class="sidebar" th:fragment="sidebar">
+            <div class="sidebar-header">
+                <div>
+                    <img class="logo" th:src="@{/static/images/logo-text.png}" alt="">
+                </div>
+                <div class="sidebar-toggle-icon ms-auto">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+            <!-- navigation start -->
+            <ul class="metismenu" id="metismenu">
+                <li class="menu-label">管理员主页</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);">
+                        <div class="menu-icon">
+                            <i class="fas fa-house"></i>
+                        </div>
+                        <div class="menu-title">管理员主页</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a th:href="@{/admin/index}">
+                                <div class="menu-icon">
+                                    <i class="fas fa-house"></i>
+                                </div>
+                                <div class="menu-title">管理员主页</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-label">用户信息管理</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);">
+                        <div class="menu-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="menu-title">用户信息管理</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a th:href="@{/admin/select-admin}">
+                                <div class="menu-icon">
+                                    <i class="fas fa-a"></i>
+                                </div>
+                                <div class="menu-title">管理员信息</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/select-teacher}">
+                                <div class="menu-icon">
+                                    <i class="fas fa-t"></i>
+                                </div>
+                                <div class="menu-title">教师信息</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/select-student}">
+                                <div class="menu-icon">
+                                    <i class="fas fa-s"></i>
+                                </div>
+                                <div class="menu-title">学生信息</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-label">课程信息管理</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);">
+                        <div class="menu-icon">
+                            <i class="fas fa-c"></i>
+                        </div>
+                        <div class="menu-title">课程信息管理</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a th:href="@{/admin/select-course}">
+                                <div class="menu-icon">
+                                    <i class="fas fa-c"></i>
+                                </div>
+                                <div class="menu-title">课程信息</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- navigation end -->
+        </aside>
+        <!-- sidebar end -->
+        <!-- header start -->
+        <header class="header" th:fragment="header">
+            <nav class="navbar">
+                <div></div>
+                <div class="dropdown user-dropdown">
+                    <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-no-caret"
+                       href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="user-img" th:src="@{/static/images/favicon.png}" alt="" width="40px">
+                        <div class="user-info ps-3" th:if="${session.user != null}">
+                            <div th:text="${session.user.getUsername()}"></div>
+                            <div th:text="${session.user.getRole()}"></div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <div class="text-center" th:if="${session.user != null}">
+                                <div th:text="${session.user.getUsername()}"></div>
+                                <div th:text="${session.user.getRole()}"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/auth/logout}">
+                                <i class="fas fa-right-from-bracket m-1"></i>
+                                <span>退出</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- header end -->
+        <!-- main content start -->
+        <div class="main-content">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col">
+                        <h2>管理员主页</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                <div class="card-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="p-4 text-right">
+                                    <h3 th:text="${'用户数量：' + userNum}"></h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                <div class="card-icon">
+                                    <i class="fas fa-c"></i>
+                                </div>
+                                <div class="p-4 text-right">
+                                    <h3 th:text="${'课程数量：' + courseNum}"></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content end -->
+        <!-- footer start -->
+        <footer class="footer" th:fragment="footer">
+            <div></div>
+        </footer>
+        <!-- footer end -->
+    </div>
+    <!-- main wrapper end -->
+    <!-- js -->
+    <script th:src="@{/static/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/lib/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/static/lib/metismenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/js/main.js}"></script>
+</body>
+
+</html>

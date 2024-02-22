@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- title -->
+    <title>作业管理系统 | 增加学生</title>
+    <!-- favicon -->
+    <link rel="icon" th:href="@{/static/images/favicon.png}" type="image/png">
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/lib/metismenu/metisMenu.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+</head>
+
+<body>
+    <!-- preloader start -->
+    <div th:replace="~{/admin/index::preloader}"></div>
+    <!-- preloader end -->
+    <!-- main wrapper start -->
+    <div class="main-wrapper">
+        <!-- sidebar start -->
+        <aside th:replace="~{/admin/index::sidebar}"></aside>
+        <!-- sidebar end -->
+        <!-- header start -->
+        <header th:replace="~{/admin/index::header}"></header>
+        <!-- header end -->
+        <!-- main content start -->
+        <div class="main-content">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col">
+                        <h2>增加学生</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="card">
+                    <div class="card-body">
+                        <form th:action="@{/admin/insert-student}" method="post">
+                            <div class="form-group">
+                                <label class="form-label" for="username">用户名</label>
+                                <input class="form-control" type="text" id="username" name="username"
+                                       placeholder="请输入用户名" th:value="${username}">
+                                <span class="small text-danger" th:text="${usernameMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="password">密码</label>
+                                <input class="form-control" type="password" id="password" name="password"
+                                       placeholder="请输入密码" th:value="${password}">
+                                <span class="small text-danger" th:text="${passwordMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="no">编号</label>
+                                <input class="form-control" type="text" id="no" name="no"
+                                       placeholder="请输入编号" th:value="${no}">
+                                <span class="small text-danger" th:text="${noMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="name">姓名</label>
+                                <input class="form-control" type="text" id="name" name="name"
+                                       placeholder="请输入姓名" th:value="${name}">
+                                <span class="small text-danger" th:text="${nameMessage}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="role">管理角色</label>
+                                <select class="form-select" id="role" name="role">
+                                    <option value="student" selected>student</option>
+                                </select>
+                                <span class="small text-danger" th:text="${roleMessage}"></span>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content end -->
+        <!-- footer start -->
+        <footer th:replace="~{/admin/index::footer}"></footer>
+        <!-- footer end -->
+    </div>
+    <!-- main wrapper end -->
+    <!-- js -->
+    <script th:src="@{/static/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/lib/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/static/lib/metismenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/js/main.js}"></script>
+</body>
+
+</html>

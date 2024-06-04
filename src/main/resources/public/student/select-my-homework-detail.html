@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <!-- favicon -->
+    <link rel="icon" th:href="@{/static/images/favicon.png}" type="image/png">
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/lib/metismenu/metisMenu.min.css}">
+    <link rel="stylesheet" th:href="@{/static/lib/DataTables/dataTables.bootstrap5.min.css}">
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+
+    <title>作业管理系统 | 我的作业详情</title>
+</head>
+
+<body>
+    <!-- preloader -->
+    <div th:replace="~{/student/index::preloader}"></div>
+    <!-- main wrapper start -->
+    <div class="main-wrapper">
+        <!-- sidebar start -->
+        <div th:replace="~{/student/index::sidebar}"></div>
+        <!-- sidebar end -->
+
+        <!-- header top start -->
+        <header th:replace="~{/student/index::header}"></header>
+        <!-- header top end -->
+
+        <!-- main content start -->
+        <div class="main-content">
+            <!-- breadcrumb start -->
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>我的作业详情</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- breadcrumb end -->
+            <div class="page-content">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>课程名称</th>
+                                    <th>教师姓名</th>
+                                    <th>状态</th>
+                                    <th>发布日期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td th:text="${homeworkVO.getId()}"></td>
+                                    <td th:text="${homeworkVO.getCourseTitle()}"></td>
+                                    <td th:text="${homeworkVO.getTeacherName()}"></td>
+                                    <td th:text="${homeworkVO.getStatus()}"></td>
+                                    <td th:text="${homeworkVO.getDeadline()}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div th:if="${homeworkRecord != null}">
+                                <div class="form-group">
+                                    <input class="form-control" th:value="${'分数：' + homeworkRecord.getScore()}"
+                                           readonly>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control"
+                                              rows="10" th:text="${homeworkRecord.getTeacherComment()}"
+                                              readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form th:action="@{/student/update-my-homework-detail}" method="post"
+                                      enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="form-label" for="id"></label>
+                                        <input class="form-control" type="hidden" id="id" name="id"
+                                               th:value="${homeworkVO.getId()}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="content">内容</label>
+                                        <textarea class="form-control" id="content" name="content"
+                                                  rows="10" th:text="${homeworkVO.getContent()}"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="attachment" class="form-label">附件</label>
+                                        <input class="form-control" type="file" id="attachment" name="attachment">
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-outline-dark">提交</button>
+                                    </div>
+                                </form>
+                                <div class="form-group"
+                                     th:if="${homeworkVO.getAttachment() != null && homeworkVO.getAttachment().length() > 0}">
+                                    <a class="btn btn-outline-dark"
+                                       th:href="@{'/student/download-attachment?id='+${homeworkVO.getId()}}">
+                                        下载附件
+                                    </a>
+                                    <span th:text="${homeworkVO.getAttachment()}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content end -->
+
+        <footer th:replace="~{/student/index::footer}"></footer>
+    </div>
+    <!-- main wrapper end -->
+
+    <!-- js -->
+    <script th:src="@{/static/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/lib/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/static/lib/metismenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/lib/DataTables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/static/lib/DataTables/dataTables.bootstrap5.min.js}"></script>
+    <script th:src="@{/static/js/main.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hms?characterEncoding=UTF-8
+    username: root
+    password: 111111
+  web:
+    resources:
+      static-locations: classpath:/public/
+  thymeleaf:
+    encoding: UTF-8
+    prefix: classpath:/public/
+    suffix: .html
+    cache: false
+    mode: LEGACYHTML5
+  security:
+    user:
+      name: user
+      password: 111111
+server:
+  port: 8080
+mybatis:
+  configuration:
+    call-setters-on-nulls: true
